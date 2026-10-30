@@ -83,9 +83,10 @@ class IBANFormField(forms.CharField):
         self.default_validators = [IBANValidator(use_nordea_extensions, include_countries)]
         super().__init__(**kwargs)
 
-        # We still need to use max_length=42 in the <input ...> instead of max_length=34 (from the model) to
-        # account for the spaces in the formatted value.
-        self.widget.attrs["max_length"] = 42
+        # We still need to use maxlength=42 in the <input ...> instead of maxlength=34 (from the model) to
+        # account for the spaces in the formatted value. The HTML attribute is "maxlength" (no underscore);
+        # "max_length" would be rendered verbatim as a proprietary attribute that browsers ignore.
+        self.widget.attrs["maxlength"] = 42
 
     def to_python(self, value):
         value = super().to_python(value)
