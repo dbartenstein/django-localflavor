@@ -419,14 +419,16 @@ class IBANTests(TestCase):
             "iban": "RU03 0445 2522 5408 1781 0538 0913 1041 9",
         })
         self.assertEqual(None, form.fields["iban"].max_length)
-        self.assertEqual(42, form.fields["iban"].widget.attrs["max_length"])
+        self.assertEqual(42, form.fields["iban"].widget.attrs["maxlength"])
+        self.assertNotIn("max_length", form.fields["iban"].widget.attrs)
 
         form.save()  # Not validation error raised.
 
     def test_form_field_input_max_length_without_model_form(self):
         form_field = IBANFormField()
         self.assertEqual(None, form_field.max_length)
-        self.assertEqual(42, form_field.widget.attrs["max_length"])
+        self.assertEqual(42, form_field.widget.attrs["maxlength"])
+        self.assertNotIn("max_length", form_field.widget.attrs)
 
 
 class BICTests(TestCase):
