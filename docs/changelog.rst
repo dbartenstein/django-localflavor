@@ -14,7 +14,8 @@ New fields for existing flavors:
 
 Modifications to existing flavors:
 
-- None
+- Fix invalid ``max_length`` widget attribute in ``IBANFormField``
+  (now ``maxlength``).
 
 Other changes:
 
